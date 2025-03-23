@@ -1,9 +1,11 @@
 package dir_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/YUSHAOCOD/fs_tree/dir"
+	"github.com/YUSHAOCOD/fs_tree/file"
 )
 
 func TestDirectoryCreation(t *testing.T) {
@@ -24,6 +26,25 @@ func TestDirectoryCreation(t *testing.T) {
 	// "/user/.local/share/nvim/session.vim"
 
 	input := "/user/Documents/reports/2025/finance/summary.pdf"
+	input2 := "/user/Music/Albums/Rock/Classic/led_zeppelin_iv.flac"
 	directory := dir.CreateDirectory(input, input, 0)
-	dir.PrintDirectory(&directory, 0)
+
+	root := dir.Directory {
+		Path: "/",
+		Name: "/",
+		ChildDir: []dir.Directory{directory},
+		ChildFile: []file.File{},
+	}
+
+	fmt.Println("Simple")
+	fmt.Println()
+	dir.PrintDirectory(&root, 0)
+	fmt.Println()
+
+	root.ChildDir = append(root.ChildDir, dir.AddDir(input2, root.ChildDir[0]))
+
+	fmt.Println()
+	fmt.Println()
+	dir.PrintDirectory(&root, 0)
+	fmt.Println()
 }
