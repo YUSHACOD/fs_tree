@@ -27,6 +27,8 @@ func TestDirectoryCreation(t *testing.T) {
 
 	input := "/user/Documents/reports/2025/finance/summary.pdf"
 	input2 := "/user/Music/Albums/Rock/Classic/led_zeppelin_iv.flac"
+	input3 :=  "/user/Downloads/software/linux/ubuntu.iso"
+	input4 := "/user/Projects/GameDev/Unity/Assets/Scripts/PlayerController.cs"
 	directory := dir.CreateDirectory(input, input, 0)
 
 	root := dir.Directory {
@@ -36,15 +38,17 @@ func TestDirectoryCreation(t *testing.T) {
 		ChildFile: []file.File{},
 	}
 
-	fmt.Println("Simple")
-	fmt.Println()
-	dir.PrintDirectory(&root, 0)
-	fmt.Println()
+	// fmt.Println("Simple")
+	// fmt.Println()
+	// dir.PrintDirectory(&root, 0)
+	// fmt.Println()
 
-	root.ChildDir = append(root.ChildDir, dir.AddDir(input2, root.ChildDir[0]))
+	root.ChildDir[0] = dir.AddDir(input2, root.ChildDir[0])
+	root.ChildDir[0] = dir.AddDir(input3, root.ChildDir[0])
+	root.ChildDir[0] = dir.AddDir(input4, root.ChildDir[0])
 
-	fmt.Println()
-	fmt.Println()
+	// fmt.Println()
+	// fmt.Println()
 	dir.PrintDirectory(&root, 0)
 	fmt.Println()
 }
